@@ -1,59 +1,38 @@
-# python-lab_5
+def show_all(countries):
+    print("\nДані про держави:")
+    for country, data in countries.items():
+        population, area = data
+        density = population / area
+        print(f"{country}: населення = {population} млн, площа = {area} тис. км², щільність = {density:.2f}")
 
-# словник: країна : (населення млн, площа тис.км2)
+def max_density_country(countries):
+    max_density = 0
+    max_country = ""
+
+    for country, data in countries.items():
+        population, area = data
+        density = population / area
+
+        if density > max_density:
+            max_density = density
+            max_country = country
+
+    print(f"\nДержава з максимальною щільністю населення: {max_country}")
+    print(f"Щільність населення: {max_density:.2f} млн/тис.км²")
+
+
 countries = {
-    "Ukraine": (36.7, 603.7),
-    "Poland": (38.2, 312.7),
-    "Germany": (83.1, 357.4),
-    "France": (67.5, 643.8),
-    "Spain": (47.4, 505.9),
-    "Italy": (59.6, 301.3),
-    "Netherlands": (17.4, 41.5),
-    "Belgium": (11.6, 30.7),
-    "Czechia": (10.5, 78.8),
-    "Portugal": (10.3, 92.1)
+    "Україна": (41, 603),
+    "Польща": (38, 312),
+    "Німеччина": (83, 357),
+    "Франція": (65, 643),
+    "Італія": (60, 301),
+    "Іспанія": (47, 505),
+    "Японія": (125, 378),
+    "Китай": (1440, 9597),
+    "Індія": (1400, 3287),
+    "Велика Британія": (67, 244)
 }
 
-def print_dict(d):
-    for key in d:
-        print(key, d[key])
-
-def add_country(d, name, population, area):
-    d[name] = (population, area)
-
-def delete_country(d, name):
-    if name in d:
-        del d[name]
-
-def print_sorted(d):
-    for key in sorted(d.keys()):
-        print(key, d[key])
-
-def max_density(d):
-    max_name = ""
-    max_val = 0
-    for name, (pop, area) in d.items():
-        density = (pop * 1_000_000) / (area * 1_000)
-        if density > max_val:
-            max_val = density
-            max_name = name
-    return max_name, max_val
-
-
-print("Весь словник:")
-print_dict(countries)
-
-print("\nДодаємо Austria:")
-add_country(countries, "Austria", 8.9, 83.9)
-print_dict(countries)
-
-print("\nВидаляємо Spain:")
-delete_country(countries, "Spain")
-print_dict(countries)
-
-print("\nСортований словник:")
-print_sorted(countries)
-
-name, density = max_density(countries)
-print("\nКраїна з найбільшою щільністю населення:")
-print(name, "-", round(density, 2), "ос/км2")
+show_all(countries)
+max_density_country(countries)
